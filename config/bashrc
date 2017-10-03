@@ -1,0 +1,4 @@
+bash /home/vagrant/start_services.sh
+cd /home/vagrant/vatic
+bash /home/vagrant/vagrant_data/config/init.bash
+exit
