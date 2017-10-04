@@ -86,14 +86,17 @@ def vatic2kitti( pathannotation, pathout, namedata, skip=10, maxerr=20):
         os.makedirs(pathname_image);
         os.makedirs(pathname_label);    
 
-    annotation=[]; names=[]
+    annotation=[]; names=[];
     with open( os.path.join(pathannotation,'{}.txt'.format(namedata)), "r" ) as f:
-        for line in f:
-            fields=line.split(' ')
-            if fields[6]!='1' and fields[7]!='1':
-                annotation.append([int(fields[5]), int(fields[1]), int(fields[2]), int(fields[3]), int(fields[4])])
-                names.append(fields[9][1:-2])
-    
+        for line in f:  
+            try: 
+                fields=line.split(' ')
+                if fields[6]!='1' and fields[7]!='1':
+                    annotation.append([int(fields[5]), int(fields[1]), int(fields[2]), int(fields[3]), int(fields[4])])
+                    names.append(fields[9][1:-2])
+            except IndexError as e:
+                print('Error format: {}'.format(e))
+              
     annotation=np.asarray(annotation)
     frame=np.unique(annotation[:,0])
     
@@ -118,7 +121,7 @@ def vatic2kitti( pathannotation, pathout, namedata, skip=10, maxerr=20):
         for num_piece in index:
             piece = ps.Piece()
             minr, minc, maxr, maxc = annotation[num_piece,1:5]
-            piece.bbox = np.array([[maxr,maxc],[minr,minc]]) 
+            piece.bbox = np.array([[minr,minc],[maxr,maxc]]) 
             piece.truncation = False
             piece.stype = names[num_piece]
             l = ps.DetectionGT()
