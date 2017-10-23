@@ -1,6 +1,4 @@
-# [Vatic](http://carlvondrick.com/vatic/) for detectNet annotation
-
-Herramienta para generar datos para el entrenamiento de la red [detectNet](hwtps://github.com/NVIDIA/DIGITS/tree/master/examples/object-detection).
+# Tutorial [Vatic](http://carlvondrick.com/vatic/) for kitti format annotation
 
 
 ### INSTALLATION
@@ -31,7 +29,7 @@ Herramienta para generar datos para el entrenamiento de la red [detectNet](hwtps
 
 ### EXPORT
 
-1- Export for detectNet format
+1- Export for kitti format
 
     python export.py
 
